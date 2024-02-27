@@ -61,9 +61,9 @@ def process_file(original_file, copy_file, client):
                 print(f'Processing line {idx + 1}/{total_lines} - {progress:.2f}% complete')
                 print(f'Original Title: {title_text}')
                 print(f'Converted Title: {sentence_case}\n')
-            else:
-                # Write the unchanged line to the file
-                file.write(line)
+            else:                
+                # file.write(line)  # Write the unchanged line to the file
+                pass
 
 def main():
     # Get OpenAI API key
