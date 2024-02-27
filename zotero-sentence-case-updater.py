@@ -1,9 +1,11 @@
+import sys
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
 import re
 import shutil
 from datetime import datetime
+
 
 def get_openai_api_key():
     # Load environment variables from .env file
@@ -72,7 +74,15 @@ def main():
     client = OpenAI(api_key=api_key)
 
     # Original file name
-    original_file = 'filename.rdf'
+    if len(sys.argv) == 2:
+        original_file = sys.argv[1]
+    else:
+        original_file = input("Please enter the filename: ")
+
+    # Check if the provided file exists
+    if not os.path.exists(original_file):
+        print(f"Error: File '{original_file}' not found.")
+        return
 
     # Generate copy file name
     copy_file_name = generate_copy_filename(original_file)
