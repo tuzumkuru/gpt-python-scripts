@@ -30,9 +30,11 @@ def convert_to_sentence_case(text, client):
     return sentence_case
 
 def generate_copy_filename(original_file):
-    # Generate copy file name with current date and time
+    # Split the original file name and extension
+    file_name, file_extension = os.path.splitext(original_file)
+    # Generate copy file name with current date and time and extension at the end
     current_time = datetime.now().strftime("%Y%m%d%H%M")
-    return f'{original_file}_copy_{current_time}'
+    return f'{file_name}_output_{current_time}{file_extension}'
 
 def copy_original_file(original_file, copy_file):
     # Copy the original file
@@ -90,8 +92,13 @@ def main():
     # Copy the original file
     copy_original_file(original_file, copy_file_name)
 
-    # Process the copy file
-    process_file(original_file, copy_file_name, client)
+    try:
+        process_file(original_file, copy_file_name, client)
+    except KeyboardInterrupt:
+        print(f"\nExiting!")
+        pass
+
+    
 
 if __name__ == "__main__":
     main()
