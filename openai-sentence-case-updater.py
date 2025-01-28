@@ -16,7 +16,17 @@ def convert_to_sentence_case(text, client):
     # Convert text to sentence case using ChatGPT
     response = client.completions.create(
         model="gpt-3.5-turbo-instruct",
-        prompt=text + "\nConvert the title above to APA version 7 style.",
+        prompt= "I want you to act as a journal editor.  \
+                I will provide you with full title of an article and you will reply with how it should be according to APA edition 7. \
+                    I want you to only reply with the corrected title inside one unique code block, and nothing else. do not write explanations. \
+                        do not type commands unless I instruct you to do so. \
+                            Basic Rules for Most Sources \
+                                APA edition 7 uses sentenced case for showing title. \
+                                    Titles and subtitles are seperated by a semi colon \
+                                        When referring to the titles of books, chapters, articles, reports, webpages, or other sources, \
+                                            capitalize only the first letter of the first word of the title and subtitle, \
+                                                the first word after a colon or a dash in the title, and proper nouns. \
+                                                    Let's start. First title is=" + text,
         max_tokens=50,
         n=1,
         stop=None,
